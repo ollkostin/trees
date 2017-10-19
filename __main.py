@@ -25,6 +25,9 @@ learnPredicted = model.predict(learnX)
 print(metrics.classification_report(learnExpected, learnPredicted))
 print(metrics.confusion_matrix(learnExpected, learnPredicted))
 
+tree.export_graphviz(model, 'learnModel.dot')
+check_call(['dot', '-Tpng', 'learnModel.dot', '-o', 'learnModel.png'])
+
 # testing model
 testX = data_array[601:, 1:21]
 testY = data_array[601:, 0]
@@ -37,5 +40,5 @@ testPredicted = model.predict(testX)
 print(metrics.classification_report(testExpected, testPredicted))
 print(metrics.confusion_matrix(testExpected, testPredicted))
 
-tree.export_graphviz(model, 'learnModel.dot')
-check_call(['dot', '-Tpng', 'learnModel.dot', '-o', 'learnModel.png'])
+tree.export_graphviz(model, 'controlModel.dot')
+check_call(['dot', '-Tpng', 'controlModel.dot', '-o', 'controlModel.png'])
