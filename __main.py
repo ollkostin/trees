@@ -12,15 +12,15 @@ data_array = np.asarray(data)
 learnX = data_array[1:600, 1:21]
 learnY = data_array[1:600, 0]
 
-print(learnX)
-print(learnY)
+# print(learnX)
+# print(learnY)
 
 # fit a CART model to the data
-learnModel = DecisionTreeClassifier()
-learnModel.fit(learnX, learnY)
+model = DecisionTreeClassifier()
+model.fit(learnX, learnY)
 # make predictions
 learnExpected = learnY
-learnPredicted = learnModel.predict(learnX)
+learnPredicted = model.predict(learnX)
 # summarize the fit of the model
 print(metrics.classification_report(learnExpected, learnPredicted))
 print(metrics.confusion_matrix(learnExpected, learnPredicted))
@@ -30,12 +30,12 @@ testX = data_array[601:, 1:21]
 testY = data_array[601:, 0]
 
 # fit a CART model to the data
-learnModel.fit(testX, testY)
+model.fit(testX, testY)
 
 testExpected = testY
-testPredicted = learnModel.predict(testX)
+testPredicted = model.predict(testX)
 print(metrics.classification_report(testExpected, testPredicted))
 print(metrics.confusion_matrix(testExpected, testPredicted))
 
-tree.export_graphviz(learnModel, 'learnModel.dot')
+tree.export_graphviz(model, 'learnModel.dot')
 check_call(['dot', '-Tpng', 'learnModel.dot', '-o', 'learnModel.png'])
